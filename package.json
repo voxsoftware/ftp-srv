@@ -57,7 +57,7 @@
   "dependencies": {
     "bunyan": "^1.8.12",
     "lodash": "^4.17.4",
-    "moment": "^2.19.1",
+    "moment": "^2.19.3",
     "uuid": "^3.1.0",
     "when": "^3.7.8"
   },
@@ -72,7 +72,6 @@
     "cz-customizable-ghooks": "1.5.0",
     "dotenv": "^4.0.0",
     "eslint": "4.5.0",
-    "eslint-config-google": "0.8.0",
     "eslint-friendly-formatter": "3.0.0",
     "eslint-plugin-mocha": "^4.11.0",
     "eslint-plugin-node": "5.1.1",
@@ -85,7 +84,7 @@
     "npm-run-all": "4.0.2",
     "nyc": "11.1.0",
     "rimraf": "2.6.1",
-    "semantic-release": "^6.3.6",
+    "semantic-release": "^8.2.0",
     "sinon": "^2.3.5"
   },
   "engines": {

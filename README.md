@@ -1,14 +1,22 @@
-[![ftp-srv](logo.png)](https://github.com/trs/ftp-srv)
+<p align="center">
+  <a href="https://github.com/trs/ftp-srv">
+    <img alt="ftp-srv" src="logo.svg" width="380" />
+  </a>
+</p>
 
-<!--[RM_DESCRIPTION]-->
-> Modern, extensible FTP Server
+<p align="center">
+  Modern, extensible FTP Server
+</p>
 
-<!--[]-->
-
-[![npm version](https://badge.fury.io/js/ftp-srv.svg)](https://badge.fury.io/js/ftp-srv) [![Build Status](https://travis-ci.org/trs/ftp-srv.svg?branch=master)](https://travis-ci.org/trs/ftp-srv)
-[![Coverage Status](https://coveralls.io/repos/github/trs/ftp-srv/badge.svg?branch=coveralls)](https://coveralls.io/github/trs/ftp-srv?branch=coveralls)  [![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release) [![Commitizen friendly](https://img.shields.io/badge/commitizen-friendly-brightgreen.svg)](http://commitizen.github.io/cz-cli/)
+<p align="center">
+  <a href="https://www.npmjs.com/package/ftp-srv">
+    <img alt="version" src="https://badge.fury.io/js/ftp-srv.svg" />
+  </a>
+</p>
 
 ---
+
+## Contents
 
 - [Overview](#overview)
 - [Features](#features)

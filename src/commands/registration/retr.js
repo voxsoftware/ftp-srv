@@ -1,4 +1,4 @@
-const when = require('when');
+const Promise = require('bluebird');
 
 module.exports = {
   directive: 'RETR',
@@ -8,11 +8,11 @@ module.exports = {
 
     return this.connector.waitForConnection()
     .tap(() => this.commandSocket.pause())
-    .then(() => when.try(this.fs.read.bind(this.fs), command.arg, {start: this.restByteCount}))
+    .then(() => Promise.try(() => this.fs.read(command.arg, {start: this.restByteCount})))
     .then(stream => {
       this.restByteCount = 0;
 
-      const eventsPromise = when.promise((resolve, reject) => {
+      const eventsPromise = new Promise((resolve, reject) => {
         this.connector.socket.once('error', err => reject(err));
 
         stream.on('data', data => this.connector.socket
@@ -26,7 +26,7 @@ module.exports = {
       .finally(() => stream.destroy ? stream.destroy() : null);
     })
     .then(() => this.reply(226))
-    .catch(when.TimeoutError, err => {
+    .catch(Promise.TimeoutError, err => {
       log.error(err);
       return this.reply(425, 'No connection established');
     })

@@ -1,4 +1,4 @@
-const when = require('when');
+const Promise = require('bluebird');
 
 module.exports = {
   directive: 'STOR',
@@ -11,16 +11,16 @@ module.exports = {
 
     return this.connector.waitForConnection()
     .tap(() => this.commandSocket.pause())
-    .then(() => when.try(this.fs.write.bind(this.fs), fileName, {append, start: this.restByteCount}))
+    .then(() => Promise.try(() => this.fs.write(fileName, {append, start: this.restByteCount})))
     .then(stream => {
       this.restByteCount = 0;
 
-      const streamPromise = when.promise((resolve, reject) => {
+      const streamPromise = new Promise((resolve, reject) => {
         stream.once('error', err => reject(err));
         stream.once('finish', () => resolve());
       });
 
-      const socketPromise = when.promise((resolve, reject) => {
+      const socketPromise = new Promise((resolve, reject) => {
         this.connector.socket.on('data', data => stream.write(data, this.transferType));
         this.connector.socket.once('end', () => {
           if (stream.listenerCount('close')) stream.emit('close');
@@ -31,11 +31,11 @@ module.exports = {
       });
 
       return this.reply(150).then(() => this.connector.socket.resume())
-      .then(() => when.join(streamPromise, socketPromise))
+      .then(() => Promise.join(streamPromise, socketPromise))
       .finally(() => stream.destroy ? stream.destroy() : null);
     })
     .then(() => this.reply(226, fileName))
-    .catch(when.TimeoutError, err => {
+    .catch(Promise.TimeoutError, err => {
       log.error(err);
       return this.reply(425, 'No connection established');
     })
